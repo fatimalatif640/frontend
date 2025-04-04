@@ -56,7 +56,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18 # Use Node.js version 18
+      nodejs: 14 # Use Node.js version 14
     commands:
       - echo "Installing dependencies..."
       - npm install # Install project dependencies
@@ -84,6 +84,7 @@ phases:
   build:
     commands:
       - echo "Building the React application..."
+      - npm install react-scripts
       - export $(cat .env.development| xargs) && npm run build # Build the React app using environment variables
 
   post_build:
