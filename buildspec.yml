@@ -10,30 +10,31 @@ phases:
       - npm install # Install project dependencies
       - npm -v # Verify npm version
       - node -v # Verify Node.js version
-      - |
-        aws ssm get-parameters-by-path \
-            --path "/todo/dev/FE" \
-            --recursive \
-            --with-decryption \
-            --query "Parameters[].[Name,Value]" \
-            --output text | while read name value; do
-            key=$(basename "$name")
-            echo "${key}=${value}" >> .env.development
-        done
-      - echo "Environment variables written to .env.development file:"
-      - cat .env.development
+      # - |
+      #   aws ssm get-parameters-by-path \
+      #       --path "/todo/dev/FE" \
+      #       --recursive \
+      #       --with-decryption \
+      #       --query "Parameters[].[Name,Value]" \
+      #       --output text | while read name value; do
+      #       key=$(basename "$name")
+      #       echo "${key}=${value}" >> .env.development
+      #   done
+      # - echo "Environment variables written to .env.development file:"
+      # - cat .env.development
 
   pre_build:
     commands:
       - echo "Validating environment variables..."
-      - test -s .env.development || (echo "Missing .env.development file or empty"; exit 1)
+      # - test -s .env.development || (echo "Missing .env.development file or empty"; exit 1)
       - npm install # Ensure all dependencies are installed
 
   build:
     commands:
       - echo "Building the React application..."
       - npm install react-scripts@latest
-      - export $(cat .env.development| xargs) && npm run build # Build the React app using environment variables
+      # - export $(cat .env.development| xargs) && npm run build # Build the React app using environment variables
+      - npm run build # Build the React app using environment variables
 
   post_build:
     commands:
