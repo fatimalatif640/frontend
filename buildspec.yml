@@ -40,8 +40,8 @@ phases:
       - echo "Build complete. Preparing to upload to S3..."
       - ls -la # List all files for debugging
       - ls build/ -la # List files in the build directory
-      - aws s3 sync build/ s3://todo-dev-app-frontend-us-west-1-739987125076 --delete # Upload files to S3 bucket
-      - aws s3 sync build/ s3://todo-dev-app-frontend-us-west-1-739987125076 --delete # Alternative bucket (if needed)
+      - aws s3 sync build/ s3://todo-dev-app-frontend-us-east-1-739987125076 --delete # Upload files to S3 bucket
+      - aws s3 sync build/ s3://todo-dev-app-frontend-us-east-1-739987125076 --delete # Alternative bucket (if needed)
 
 artifacts:
   files:
